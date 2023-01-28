@@ -42,4 +42,6 @@ fi
 ###########################
 # Generate joint-snp-sv ldsc annotation and score files
 ###########################
-sh generate_ldsc_baselineld_sv_annotation_and_score_files.sh $merged_genotype_dir $baseline_ld_dir $ldsc_baselineld_sv_dir $ldsc_weights_dir $ldsc_code_dir
+if false; then
+sbatch generate_ldsc_baselineld_sv_annotation_and_score_files.sh $merged_genotype_dir $baseline_ld_dir $ldsc_baselineld_sv_dir $ldsc_weights_dir $ldsc_code_dir
+fi
