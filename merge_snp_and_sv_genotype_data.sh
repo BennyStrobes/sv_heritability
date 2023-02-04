@@ -11,6 +11,7 @@ common_snp_plink_dir="$1"
 sv_vcf_file="$2"
 merged_genotype_dir="$3"
 
+if false; then
 # Convert SV vcf to plink format
 # Note: I am restricting here to bi-allelic variants (MAYBE THAT IS BAD??)
 sv_plink_stem=${merged_genotype_dir}"sv_only"
@@ -39,7 +40,9 @@ for chr in {1..22}; do
 	stringer=${stringer}${common_snp_plink_dir}"1000G.EUR.QC."${chr}"\n"
 done
 
+fi
 joint_plink_stem=${merged_genotype_dir}"snp_sv_merged_EUR"
+if false; then
 printf ${stringer} > ${merged_genotype_dir}"temp_file.txt"
 plink --bfile ${eur_sv_common_plink_stem} --merge-list ${merged_genotype_dir}"temp_file.txt" --make-bed --out ${joint_plink_stem}
 
@@ -48,10 +51,13 @@ plink --bfile ${eur_sv_common_plink_stem} --merge-list ${merged_genotype_dir}"te
 # Add hack to set CM column to CM value of closest possible snp with CM column
 python3 hack_fix_of_no_cm_values_for_svs.py ${joint_plink_stem}".bim"
 
-
+fi
 # split up final plink file into seperate files for each chromosome
 for chr in {1..22}; do
+	if false; then
 	plink --bfile ${joint_plink_stem} --chr $chr --make-bed --out ${joint_plink_stem}"_chr"$chr
+	fi
+	plink --bfile ${joint_plink_stem}"_chr"$chr --freq --out ${joint_plink_stem}"_chr"$chr
 done
 
 

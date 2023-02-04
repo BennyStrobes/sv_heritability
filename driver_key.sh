@@ -16,6 +16,9 @@ baseline_ld_dir="/n/groups/price/ldsc/reference_files/1000G_EUR_Phase3/baselineL
 # S-LDSC regression snp weights directory
 ldsc_weights_dir="/n/groups/price/ldsc/reference_files/1000G_EUR_Phase3/weights/"
 
+# Summary stats directory for sldsc
+ldsc_sumstats_dir="/n/groups/price/ldsc/sumstats_formatted_2021/"
+
 ###########################
 # Output data
 ###########################
@@ -29,6 +32,9 @@ merged_genotype_dir=$temp_output_root"merged_genotype/"
 # Directory store joint-snp-sv ldsc annotation and scores
 ldsc_baselineld_sv_dir=$temp_output_root"ldsc_baselineld_sv/"
 
+
+# Directory store s-ldsc results when run on sv data
+ldsc_sv_results_dir=$perm_output_root"ldsc_sv_results/"
 
 
 
@@ -45,3 +51,9 @@ fi
 if false; then
 sbatch generate_ldsc_baselineld_sv_annotation_and_score_files.sh $merged_genotype_dir $baseline_ld_dir $ldsc_baselineld_sv_dir $ldsc_weights_dir $ldsc_code_dir
 fi
+
+###########################
+# Run S-LDSC
+###########################
+sh run_sldsc.sh $merged_genotype_dir $ldsc_baselineld_sv_dir $ldsc_weights_dir $ldsc_code_dir $ldsc_sumstats_dir $ldsc_sv_results_dir
+

@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH -c 1                               # Request one core
-#SBATCH -t 0-10:00                         # Runtime in D-HH:MM format
+#SBATCH -t 0-5:00                         # Runtime in D-HH:MM format
 #SBATCH -p short                           # Partition to run in
-#SBATCH --mem=20G                         # Memory total in MiB (for all cores)
+#SBATCH --mem=50G                         # Memory total in MiB (for all cores)
 
 source ~/.bash_profile
 
@@ -16,17 +16,15 @@ ldsc_code_dir="$5"
 
 
 # Generate annotation file
-if false; then
 python3 generate_ldsc_baselineld_sv_annotation_file.py $merged_genotype_dir $baseline_ld_dir $ldsc_baselineld_sv_dir
-fi
+
 
 
 
 # Genereate regression snp list
 regression_snp_list=${ldsc_baselineld_sv_dir}"hm3_noMHC.rsid"
-if false; then
 python3 generate_regression_snp_list_from_regression_weights_dir.py $regression_snp_list $ldsc_weights_dir
-fi
+
 
 
 

@@ -59,7 +59,7 @@ def generate_annotation_file_for_single_chromosome(ordered_variants, baseline_ld
 				print('assumptoin eroror')
 				pdb.set_trace()
 			snp_anno_vec = np.zeros(len(snp_anno_names[4:]))
-			snp_anno_vec[0] = 1.0
+			snp_anno_vec[0] = 0.0
 			t.write(row_header + '\t' + '\t'.join(snp_anno_vec.astype(int).astype(str)) + '\t1\n')
 	t.close()
 	return
